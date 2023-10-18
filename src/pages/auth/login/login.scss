@@ -1,0 +1,41 @@
+.login_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  //   background: rgb(107,18,183);
+  // background: radial-gradient(circle, rgba(107,18,183,1) 0%, rgba(255,255,255,1) 100%);
+
+  .login_subwrapper {
+    width: 50%;
+    height: 50%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 10px 10px 57px 0px rgba(0, 0, 0, 0.75);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+
+    .login_content {
+      width: 300px;
+      .logo {
+      }
+      .header_ {
+      }
+      .login_type_tab {
+        width: 100%;
+        display: flex;
+        gap: 10px ;
+        .activetab {
+          border-radius: 50%;
+          background-color: #6b12b7;
+        }
+        .inactivetab {
+          background-color: #fff;
+        }
+      }
+    }
+  }
+}

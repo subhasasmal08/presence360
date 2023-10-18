@@ -1,0 +1,113 @@
+@use "sass:math";
+$desk: math.div(100, 1920);
+
+.phone-ib {
+  // display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 0.9375vw;
+  height: 44px;
+  .phone_no_wrapper {
+    position: relative;
+    display: flex;
+    width: 272* $desk + vw;
+    margin-top: 10px;
+    border-radius: 6* $desk + vw;
+    padding: 0.6vw 0.8333333333vw;
+    font-size: 0.6770833333vw;
+    align-items: center;
+    height: 100%;
+    box-shadow: 0* $desk + vw 0* $desk + vw 6* $desk + vw 2* $desk + vw rgba(0, 0, 0, 0.06);
+    border: 2* $desk + vw solid transparent;
+    background-color: var(--body-background);
+    .country_dial_code {
+      font-size: 16px;
+      color: #949494;
+      font-weight: 400;
+      // margin: 0 10 * $desk + vw;
+    }
+    .country_flags {
+      margin-right: 10 * $desk + vw;
+      cursor: pointer;
+    }
+    .phone_input_style {
+      // margin-top: 2px;
+      outline: none;
+      font-size: 16px;
+      border: 0;
+      margin-left: 8px;
+      width: 100%;
+      background: transparent;
+      color: var(--text);
+      outline-color: var(--primary);
+    }
+    .nav_drop {
+      width: 0.7vw;
+      cursor: pointer;
+      transition: all 0.1s ease-in;
+      margin-right: 0.5208333333vw;
+    }
+    .navbar_invert {
+      transform: rotate(180deg);
+    }
+  }
+  .flag_suggestion {
+    position: absolute;
+    top: 92%;
+    left: 0;
+    width: 100%;
+    background: red;
+    z-index: 4;
+    border-radius: 5px;
+    border: 2px solid #dddddd;
+    background-color: #fff;
+    .flag_options {
+      display: flex;
+      padding: 5 * $desk + vw;
+      cursor: pointer;
+      &:hover {
+        background-color: #dddddd;
+      }
+    }
+    .flag_search_container {
+      display: flex;
+      padding: 0.5vw;
+      align-items: center;
+      .search_icon {
+        width: 2vw;
+      }
+      .flag_search_input {
+        width: 100%;
+        outline-color: var(--primary);
+        font-size: 12 * $desk + vw;
+        padding: 0.2vw;
+      }
+    }
+    .country_name {
+      font-size: 0.7125vw;
+      color: #111b60;
+      font-weight: 600;
+      margin: 0 10 * $desk + vw;
+      max-width: 60%;
+    }
+   
+    .active_flag {
+      background-color: var(--primary);
+      .country_name {
+        color: #fff;
+      }
+    }
+  }
+  label {
+    font-size: 15 * $desk + vw;
+    color: var(--primaryInvert);
+    font-weight: 600;
+  }
+  .helperText {
+    color: red;
+    font-size: 14 * $desk + vw;
+    margin-left: 10px;
+    margin-top: 5px;
+    text-align: end;
+  }
+}
