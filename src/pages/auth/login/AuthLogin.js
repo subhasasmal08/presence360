@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./login.scss";
 import Button from "../../../components/Button/Button";
 import InputBox from "../../../components/InputBox/InputBox";
@@ -7,14 +7,38 @@ import PhoneNumber from "../../../components/PhoneNumber/PhoneNumber";
 export default function AuthLogin() {
   const [activeTab, setActiveTab] = useState("email");
   const [passwordType, setPasswordType] = useState("password");
-  const [loginData, setloginData] = useState({
-    email: "",
-    phone_number: "",
-    password: "",
-  });
+  const [showErrorMsg, setShowErrorMsg] = useState("");
+  const [loginData, setloginData] = useState({});
+
+  useEffect(() => {
+    if (activeTab === "mobile") {
+      setloginData({
+        phone_number: "",
+        password: "",
+      });
+    } else {
+      setloginData({
+        email: "",
+        password: "",
+      });
+    }
+  }, [activeTab]);
 
   const postLogin = () => {
     let _res = false;
+
+    Object.keys(loginData).map((item) => {
+      if (loginData[item] === "") {
+        _res = true;
+      }
+    });
+
+    if (_res) {
+      setShowErrorMsg("fill");
+      return;
+    } else {
+      console.log("api call for post login data");
+    }
   };
 
   const handlePassword = (type) => {
@@ -36,6 +60,7 @@ export default function AuthLogin() {
               className={activeTab === "email" ? "activetab" : "inactivetab"}
               onClick={() => {
                 setActiveTab("email");
+                setShowErrorMsg("");
               }}
             >
               Email
@@ -44,6 +69,7 @@ export default function AuthLogin() {
               className={activeTab === "mobile" ? "activetab" : "inactivetab"}
               onClick={() => {
                 setActiveTab("mobile");
+                setShowErrorMsg("");
               }}
             >
               Mobile
@@ -61,6 +87,7 @@ export default function AuthLogin() {
                       email: e.target.value,
                     }));
                   }}
+                  onFocus={() => setShowErrorMsg("")}
                 />
               </div>
             ) : (
@@ -70,14 +97,14 @@ export default function AuthLogin() {
                   id="phone"
                   isEdit={true}
                   fetchedNumber={""}
-                  value={loginData.phone_number}
+                  value={""}
                   onChange={(data) => {
                     setloginData((prev) => ({
                       ...prev,
                       phone_number: data.inputNumber,
                     }));
                   }}
-                  onFocus={(e) => ""}
+                  onFocus={() => setShowErrorMsg("")}
                   tabIndex="3"
                   style={{ height: "88px" }}
                 />
@@ -97,9 +124,11 @@ export default function AuthLogin() {
                   }));
                 }}
                 value={loginData.password}
+                onFocus={() => setShowErrorMsg("")}
               />
             </div>
           </div>
+          {showErrorMsg}
           <Button name={"Login"} onClick={() => postLogin()} />
         </div>
       </div>
