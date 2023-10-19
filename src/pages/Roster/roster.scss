@@ -1,0 +1,32 @@
+.roster_wrapper {
+  .roster_subwrapper {
+    width: 1140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    .roster_table_wrapper{
+      .table_upper_wrapper{
+        display: flex;
+        justify-content: space-between;
+        .table_filters {
+          display: flex;
+          align-items: center;
+          .__input__ {
+            .input_style {
+            }
+          }
+          .btn {
+            padding: 0px 5px;
+          }
+        }
+      }
+
+      .filters_wrapper{
+
+      }
+    }
+  }
+}

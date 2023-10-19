@@ -13,7 +13,7 @@ export default function Attendance() {
   const [showFilters, setShowFilters] = useState(false);
   const [showExportModal, setshowExportModal] = useState(false);
   const [rangeDate, setRangeDate] = useState([]);
-  const [totPages, settotPages] = useState("")
+  const [totPages, settotPages] = useState("");
   const [filters, setFilters] = useState([
     {
       Data_range: "",
@@ -467,7 +467,6 @@ export default function Attendance() {
                 }
               })}
             </div>
-            
           )}
           <table>
             {Object.keys(attendanceData[0]).map((item, index) => {
