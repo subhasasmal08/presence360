@@ -1,0 +1,56 @@
+.attendance_wrapper {
+  .attendance_subwrapper {
+    max-width: 1140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    .attendance_table_wrapper {
+      .table_upper_wrapper {
+        display: flex;
+        justify-content: space-between;
+        .table_filters {
+          display: flex;
+          align-items: center;
+          .__input__ {
+            .input_style {
+            }
+          }
+          .btn {
+            padding: 0px 5px;
+          }
+        }
+      }
+      .filters_wrapper {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+
+        .date_picker {
+          display: flex;
+          flex-direction: column;
+        }
+        .filters_dd {
+          width: 200px;
+        }
+      }
+    }
+  }
+  .export_modal {
+    background-color: #fff;
+    width: 500px;
+    height: 500px;
+    border-radius: 10px;
+    padding: 10px;
+    .close_otp_modal {
+      .close_icon {
+        cursor: pointer;
+      }
+    }
+  }
+}

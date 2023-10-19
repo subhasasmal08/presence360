@@ -1,47 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-    BrowserRouter,
-    Routes, // instead of "Switch"
-    Route,
-    useLocation,
-  } from "react-router-dom";
+  BrowserRouter,
+  Routes, // instead of "Switch"
+  Route,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
 import AuthLogin from "./pages/auth/login/AuthLogin";
 import { AnimatePresence } from "framer-motion";
+import Attendance from "./pages/Attendance/Attendance";
+import Roster from "./pages/Roster/Roster";
 
 export default function RoutesApp() {
   const location = useLocation();
 
+  const [Links, setLinks] = useState([
+    <Route path="/attendance" element={<Attendance/>} strict exact />,
+    <Route path="/roster" element={<Roster/>} strict exact />,
+  ]);
+
   return (
     <AnimatePresence>
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<AuthLogin/>} strict exact />
+        <Route path="/" element={<AuthLogin />} strict exact />
+        {Links.map((item) => item)}
       </Routes>
     </AnimatePresence>
   );
 }
-
-// const PrivateRoute = ({ component: Component, ...rest }) => (
-//     <Route
-//       {...rest}
-//       render={(props) =>
-//         encryptStorage.getItem("UID") ? (
-//           Component ? (
-//             <Component {...props} />
-//           ) : (
-//             rest.render(props)
-//           )
-//         ) : (
-//           <Redirect
-//             to={{
-//               pathname: "/",
-//               state: { from: props.location },
-//             }}
-//           />
-//         )
-//       }
-//     />
-//   );
-
-const PublicRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={(props) => <Component {...props} />} />
-);
