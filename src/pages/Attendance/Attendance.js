@@ -13,6 +13,7 @@ export default function Attendance() {
   const [showFilters, setShowFilters] = useState(false);
   const [showExportModal, setshowExportModal] = useState(false);
   const [rangeDate, setRangeDate] = useState([]);
+  const [totPages, settotPages] = useState("")
   const [filters, setFilters] = useState([
     {
       Data_range: "",
@@ -489,7 +490,6 @@ export default function Attendance() {
             <Pagination
               style={{ justifyContent: "center" }}
               totPages={4}
-              // totPages={300}
               currentPage={1}
               rowCount={10}
               pageClicked={(ele, count_) => {
