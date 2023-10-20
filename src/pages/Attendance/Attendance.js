@@ -16,7 +16,7 @@ export default function Attendance() {
   const [totPages, settotPages] = useState("");
   const [filters, setFilters] = useState([
     {
-      Data_range: "",
+      Data_range: [],
       options: [""],
     },
     {
@@ -419,6 +419,7 @@ export default function Attendance() {
                         value={rangeDate}
                         highlightToday={false}
                         onChange={(dates) => {
+                          let _filters = [...filters];
                           let datess = [];
                           for (let i = 0; i < dates.length; i++) {
                             var date = new Date(dates[i])
@@ -426,7 +427,9 @@ export default function Attendance() {
                               .replace(/\//g, "-");
                             datess.push(date);
                           }
-                          setRangeDate([...datess]);
+                          _filters[0]["Data_range"] = [...datess];
+                          setFilters([..._filters]);
+                          // setRangeDate([...datess]);
                         }}
                         style={{ position: "relative" }}
                         onFocus={""}
@@ -468,6 +471,7 @@ export default function Attendance() {
               })}
             </div>
           )}
+          {console.log(filters)}
           <table>
             {Object.keys(attendanceData[0]).map((item, index) => {
               return (

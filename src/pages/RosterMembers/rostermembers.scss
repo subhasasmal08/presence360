@@ -1,13 +1,13 @@
-.roster_wrapper {
-  .roster_subwrapper {
-    width: 1140px;
+.roster_members_wrapper {
+  .roster_members_subwrapper {
+    max-width: 1140px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-right: auto;
     margin-left: auto;
     position: relative;
-    .roster_table_wrapper {
+    .roster_members_table_wrapper {
       width: 1140px;
       table {
         width: 100%;
@@ -25,6 +25,10 @@
       .table_upper_wrapper {
         display: flex;
         justify-content: space-between;
+        .navigation_bar {
+          display: flex;
+          align-items: center;
+        }
         .table_filters {
           display: flex;
           align-items: center;
@@ -37,7 +41,6 @@
           }
         }
       }
-
       .filters_wrapper {
         width: 100%;
         display: flex;
@@ -52,32 +55,6 @@
         .filters_dd {
           width: 200px;
         }
-      }
-    }
-  }
-
-  .import_modal {
-    background-color: #fff;
-    width: 500px;
-    height: 500px;
-    border-radius: 10px;
-    padding: 10px;
-    .close_otp_modal {
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      .close_icon {
-        cursor: pointer;
-      }
-    }
-    .modal_wrapper {
-      .date_picker {
-        display: flex;
-      }
-      .modal_subwrapper {
-        display: flex;
-        flex-direction: column;
       }
     }
   }
