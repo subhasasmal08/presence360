@@ -8,6 +8,7 @@ import AnimatedModal from "../../components/Modal/AnimatedModal";
 import { CloseIcon } from "../../helper/icons";
 import DatePicker from "react-multi-date-picker";
 import Pagination from "../../components/Pagination/Pagination";
+import Scroller from "../../components/Scroller/Scrollbar";
 
 export default function Attendance() {
   const [showFilters, setShowFilters] = useState(false);
@@ -16,7 +17,7 @@ export default function Attendance() {
   const [totPages, settotPages] = useState("");
   const [filters, setFilters] = useState([
     {
-      Data_range: [],
+      Date_range: [],
       options: [""],
     },
     {
@@ -383,12 +384,11 @@ export default function Attendance() {
 
   return (
     <div className="attendance_wrapper">
-      {console.log(rangeDate)}
       <Navbar />
       <div className="attendance_subwrapper">
         <div className="attendance_table_wrapper">
           <div className="table_upper_wrapper">
-            <p>Attendance Listing</p>
+            <p className="header_">Attendance Listing</p>
             <div className="table_filters">
               <InputBox type="search" placeholder={"search"} />
               <Button
@@ -408,11 +408,12 @@ export default function Attendance() {
           {showFilters && (
             <div className="filters_wrapper">
               {filters.map((item, idx) => {
-                if (Object.keys(item)[0] === "Data_range") {
+                if (Object.keys(item)[0] === "Date_range") {
                   return (
                     <div className="date_picker">
                       <label>{Object.keys(item)[0].replaceAll("_", " ")}</label>
                       <DatePicker
+                      placeholder="Select Range"
                         ref={ref}
                         range
                         format="DD-MM-YYYY"
@@ -471,25 +472,25 @@ export default function Attendance() {
               })}
             </div>
           )}
-          {console.log(filters)}
           <table>
-            {Object.keys(attendanceData[0]).map((item, index) => {
-              return (
-                <th key={"header" + index}>{item.replaceAll("_", " ")}</th>
-              );
-            })}
-            {attendanceData.map((item, idx) => {
-              return (
-                <tr key={"table" + idx}>
-                  {Object.keys(item).map((data) => {
-                    return <td>{item[data]}</td>;
-                  })}
-                </tr>
-              );
-            })}
+            <Scroller autoHeightMax="65vh">
+              {Object.keys(attendanceData[0]).map((item, index) => {
+                return (
+                  <th key={"header" + index}>{item.replaceAll("_", " ")}</th>
+                );
+              })}
+              {attendanceData.map((item, idx) => {
+                return (
+                  <tr key={"table" + idx}>
+                    {Object.keys(item).map((data) => {
+                      return <td>{item[data]}</td>;
+                    })}
+                  </tr>
+                );
+              })}
+            </Scroller>
           </table>
           <div>
-            {console.log(filters)}
             <Pagination
               style={{ justifyContent: "center" }}
               totPages={4}

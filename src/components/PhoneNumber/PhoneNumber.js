@@ -20,6 +20,7 @@ export default function PhoneNumber({
   disabled,
   tabIndex,
   fetchedNumber,
+  placeholder
 }) {
   const scrollRef = useRef();
   const primaryRef = useRef();
@@ -223,6 +224,7 @@ export default function PhoneNumber({
         </p>
 
         <input
+        placeholder={placeholder}
           type={"text"}
           className="phone_input_style"
           onChange={(e) => {

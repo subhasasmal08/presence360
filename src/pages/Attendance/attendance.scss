@@ -1,6 +1,6 @@
 .attendance_wrapper {
   .attendance_subwrapper {
-    max-width: 1140px;
+    // max-width: 1140px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,7 +8,12 @@
     margin-left: auto;
     position: relative;
     .attendance_table_wrapper {
-      width: 1140px;
+      width: 80%;
+      padding: 20px;
+      margin-top: 50px;
+      border-radius: 10px;
+      box-shadow: 0 4px 24px 0 rgba(34, 41, 47, 0.1);
+      transition: all 0.3s ease-in-out, background 0s, color 0s, border-color 0s;
       table {
         width: 100%;
       }
@@ -20,20 +25,41 @@
       th,
       td {
         text-align: start;
-        padding: 7px;
+        padding: 20px;
+        text-transform: capitalize;
+        border-bottom: 1px solid #cfcfcf;
+      }
+      th {
+        font-weight: 500;
+        background-color: rgb(235 221 247 / 59%);
+      }
+      td {
+        font-size: 16px;
+        color: #7a7a7a;
+        font-weight: 400;
       }
       .table_upper_wrapper {
         display: flex;
         justify-content: space-between;
+        .header_ {
+          font-size: 20px;
+          font-weight: 600;
+        }
         .table_filters {
           display: flex;
           align-items: center;
           .__input__ {
+            margin-bottom: 0;
+            margin-top: 0;
+            width: 100%;
+            align-items: center;
             .input_style {
+              padding: 8px;
+              margin-top: 0;
             }
           }
           .btn {
-            padding: 0px 5px;
+            padding: 6px;
           }
         }
       }
@@ -43,16 +69,47 @@
         flex-wrap: wrap;
         align-items: center;
         gap: 10px;
+        padding: 20px;
 
         .date_picker {
           display: flex;
           flex-direction: column;
+
+          label {
+            margin-bottom: 5px;
+            font-size: 0.78125vw;
+            font-weight: 600;
+            margin-bottom: 5px;
+          }
+
+          .rmdp-input {
+            font-family: "Open Sans" !important;
+            font-size: 0.7291666667vw;
+            border-radius: 8px;
+            border: 2px solid #dddddd;
+            padding: 3px;
+            margin: 0;
+            width: 190px;
+          }
+          .decision_buttons {
+            display: flex;
+            .btn {
+              padding: 5px;
+              margin-bottom: 5px;
+            }
+          }
         }
         .filters_dd {
           width: 200px;
+          .dd-label {
+            margin-top: 0;
+          }
+          .selected-text {
+            color: #7a7a7a;
+            background-color: #fff;
+          }
         }
       }
     }
   }
-
 }

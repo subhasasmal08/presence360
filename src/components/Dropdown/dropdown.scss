@@ -89,7 +89,8 @@ $desk: math.div(100, 1920);
       font-size: 14 * $desk + vw;
       &:hover {
         // background-color: var(--primary);
-        color: #ffffff;
+        background-color: #cf75e7dc;
+       color: #fff;
       }
     }
   }

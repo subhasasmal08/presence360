@@ -10,16 +10,16 @@ $desk: math.div(100, 1920);
   .phone_no_wrapper {
     position: relative;
     display: flex;
-    width: 272* $desk + vw;
+    width: 272 * $desk + vw;
     margin-top: 10px;
-    border-radius: 6* $desk + vw;
+    border-radius: 6 * $desk + vw;
     padding: 0.6vw 0.8333333333vw;
     font-size: 0.6770833333vw;
     align-items: center;
     height: 100%;
-    box-shadow: 0* $desk + vw 0* $desk + vw 6* $desk + vw 2* $desk + vw rgba(0, 0, 0, 0.06);
-    border: 2* $desk + vw solid transparent;
-    background-color: var(--body-background);
+    box-shadow: 0 * $desk + vw 0 * $desk + vw 6 * $desk + vw 2 * $desk + vw
+      rgba(0, 0, 0, 0.06);
+    border: 2 * $desk + vw solid transparent;
     .country_dial_code {
       font-size: 16px;
       color: #949494;
@@ -38,8 +38,8 @@ $desk: math.div(100, 1920);
       margin-left: 8px;
       width: 100%;
       background: transparent;
-      color: var(--text);
-      outline-color: var(--primary);
+      color: #202020;
+      outline-color: #013aa2;
     }
     .nav_drop {
       width: 0.7vw;
@@ -52,10 +52,11 @@ $desk: math.div(100, 1920);
     }
   }
   .flag_suggestion {
+    padding: 10px;
     position: absolute;
     top: 92%;
     left: 0;
-    width: 100%;
+    width: 97%;
     background: red;
     z-index: 4;
     border-radius: 5px;
@@ -64,6 +65,7 @@ $desk: math.div(100, 1920);
     .flag_options {
       display: flex;
       padding: 5 * $desk + vw;
+      align-items: center;
       cursor: pointer;
       &:hover {
         background-color: #dddddd;
@@ -78,7 +80,7 @@ $desk: math.div(100, 1920);
       }
       .flag_search_input {
         width: 100%;
-        outline-color: var(--primary);
+        outline-color: #013aa2;
         font-size: 12 * $desk + vw;
         padding: 0.2vw;
       }
@@ -90,9 +92,9 @@ $desk: math.div(100, 1920);
       margin: 0 10 * $desk + vw;
       max-width: 60%;
     }
-   
+
     .active_flag {
-      background-color: var(--primary);
+      background-color: #b980fa;
       .country_name {
         color: #fff;
       }
@@ -100,7 +102,6 @@ $desk: math.div(100, 1920);
   }
   label {
     font-size: 15 * $desk + vw;
-    color: var(--primaryInvert);
     font-weight: 600;
   }
   .helperText {
