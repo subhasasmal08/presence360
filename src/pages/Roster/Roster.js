@@ -9,63 +9,65 @@ import { CloseIcon } from "../../helper/icons";
 import DatePicker from "react-multi-date-picker";
 import pdf from "../../assets/shiftSample.xlsx";
 import { useNavigate } from "react-router-dom";
+import Dropdown from "../../components/Dropdown/Dropdown";
 
 export default function Roaster() {
+  const fromRef = useRef();
+  const toRef = useRef();
+  const ref = useRef();
+  const navigate = useNavigate();
+
   const [showFilters, setShowFilters] = useState(false);
   const [showImportModal, setshowImportModal] = useState(false);
+  const [totalPages, setTotalPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [fileName, setfileName] = useState({});
   const [filters, setFilters] = useState([
     {
       From_date: "",
+      ref: fromRef,
     },
     {
       To_date: "",
+      ref: toRef,
     },
   ]);
-  const navigate = useNavigate();
 
-  const ref = useRef();
+  const [fileDate, setFileDate] = useState([
+    {
+      From: "",
+      ref: fromRef,
+    },
+    {
+      To: "",
+      ref: toRef,
+    },
+  ]);
 
   const [rosterData, setRosterData] = useState([
     {
       from: "07-10-23",
       to: "07-10-90",
-      actions: "actions",
+      actions: "View members",
     },
     {
       from: "07-10-23",
       to: "07-10-90",
-      actions: "actions",
+      actions: "View members",
     },
     {
       from: "05-10-23",
       to: "06-10-90",
-      actions: "actions",
+      actions: "View members",
     },
     {
       from: "07-10-23",
       to: "07-10-90",
-      actions: "actions",
+      actions: "View members",
     },
   ]);
 
-  // const addRows = (index) => {
-  //   let _data = [...rosterData];
-  //   _data.splice(index + 1, 0, {
-  //     new: "subha",
-  //     new1: "subha",
-  //     new2: "subha",
-  //     new3: "subha",
-  //     new4: "subha",
-  //     new5: "subha",
-  //     new6: "subha",
-  //   });
-  //   setRosterData([..._data]);
-  // };
-  // const deleteRows = (index) => {
-  //   let _data = [...rosterData];
-  //   _data.splice(index + 1, 1);
-  //   setRosterData([..._data]);
-  // };
+  const downloadFile = (type) => {};
 
   return (
     <div className="roster_wrapper">
@@ -73,10 +75,14 @@ export default function Roaster() {
       <div className="roster_subwrapper">
         <div className="roster_table_wrapper">
           <div className="table_upper_wrapper">
-            <p>Roster Plan Master Listing</p>
+            <p className="header_">Roster Plan Master Listing</p>
             <div className="table_filters">
               <InputBox type="search" placeholder={"search"} />
-              <Button name={"Export"} onClick={() => {}} />
+              <Dropdown
+                defaultText={"Export"}
+                optionsList={["Print", "Csv", "Excel", "Pdf", "Copy"]}
+                handleOption={(data) => downloadFile()}
+              />
               <Button
                 name={"Import"}
                 onClick={() => {
@@ -97,13 +103,18 @@ export default function Roaster() {
                 return (
                   <div className="date_picker">
                     <label>{Object.keys(item)[0].replaceAll("_", " ")}</label>
+                    {console.log(Object.values(item)[0])}
                     <DatePicker
-                      ref={ref}
+                      placeholder={
+                        "Select " +
+                        Object.keys(item)[0].replaceAll("_", " ").toLowerCase()
+                      }
+                      ref={item.ref}
                       format="DD-MM-YYYY"
-                      value={""}
+                      value={Object.values(item)[0]}
                       highlightToday={false}
                       onChange={(dates) => {
-                        let datess = [];
+                        let datess = "";
                         let _filters = [...filters];
                         for (let i = 0; i < dates.length; i++) {
                           var date = new Date(dates[i])
@@ -111,7 +122,8 @@ export default function Roaster() {
                             .replace(/\//g, "-");
                           datess.push(date);
                         }
-                        _filters[0]["from"] = [...datess];
+                        console.log(datess);
+                        _filters[idx][Object.keys(item)[0]] = datess;
                         setFilters([..._filters]);
                         // setRangeDate([...datess]);
                       }}
@@ -122,14 +134,19 @@ export default function Roaster() {
                         <Button
                           name={"Cancel"}
                           onClick={() => {
+                            console.log(Object.keys(item)[0]);
+                            let _filters = [...filters];
+                            _filters[idx][Object.keys(item)[0]] = "";
+                            console.log(_filters[idx].To_date);
+                            setFilters([..._filters]);
                             // setRangeDate([]);
-                            ref.current.closeCalendar();
+                            item.ref.current.closeCalendar();
                           }}
                         />
                         <Button
                           name={"Ok"}
                           onClick={() => {
-                            ref.current.closeCalendar();
+                            item.ref.current.closeCalendar();
                           }}
                           // disabled={this.state.RangeDate.length === 0}
                         />
@@ -151,8 +168,14 @@ export default function Roaster() {
                   {Object.keys(item).map((data) => {
                     return (
                       <td
+                        style={{
+                          textDecoration:
+                            item[data] === "View members" && "underline",
+                          color: item[data] === "View members" && "#7367f0",
+                          cursor: item[data] === "View members" && "pointer",
+                        }}
                         onClick={() => {
-                          item[data] === "actions" &&
+                          item[data] === "View members" &&
                             navigate("/roster/members/" + item.from);
                           // if (item[data] === "view members") {
                           //   item[data] = "hide members";
@@ -175,12 +198,12 @@ export default function Roaster() {
           </table>
           <Pagination
             style={{ justifyContent: "center" }}
-            totPages={4}
-            currentPage={1}
+            totPages={totalPages}
+            currentPage={currentPage}
             rowCount={10}
             pageClicked={(ele, count_) => {
-              //   setCurrentPage(ele);
-              //   getData({ currentPage: ele });
+              setCurrentPage(ele);
+              // getAttendanceData({ currentPage: ele, searchText: "" });
             }}
           />
         </div>
@@ -191,109 +214,134 @@ export default function Roaster() {
             className="close_otp_modal"
             onClick={() => {
               setshowImportModal(false);
+              setfileName({});
             }}
           >
-            <p>Import salary component via excel file</p>
+            <p className="header_">Import salary component via excel file</p>
             <CloseIcon />
           </div>
           <div className="modal_wrapper">
-            <div className="date_picker">
-              <label>From Date</label>
-              <DatePicker
-                ref={ref}
-                format="DD-MM-YYYY"
-                value={""}
-                highlightToday={false}
-                onChange={(dates) => {
-                  // let datess = [];
-                  // for (let i = 0; i < dates.length; i++) {
-                  //   var date = new Date(dates[i])
-                  //     .toLocaleDateString("en-GB")
-                  //     .replace(/\//g, "-");
-                  //   datess.push(date);
-                  // }
-                  // setRangeDate([...datess]);
-                }}
-                style={{ position: "relative" }}
-                onFocus={""}
-              >
-                <div className="decision_buttons">
-                  <Button
-                    name={"Cancel"}
-                    onClick={() => {
-                      // setRangeDate([]);
-                      ref.current.closeCalendar();
-                    }}
-                  />
-                  <Button
-                    name={"Ok"}
-                    onClick={() => {
-                      ref.current.closeCalendar();
-                    }}
-                    // disabled={this.state.RangeDate.length === 0}
-                  />
-                </div>
-              </DatePicker>
-              <label>To Date</label>
-              <DatePicker
-                ref={ref}
-                format="DD-MM-YYYY"
-                value={""}
-                highlightToday={false}
-                onChange={(dates) => {
-                  // let datess = [];
-                  // for (let i = 0; i < dates.length; i++) {
-                  //   var date = new Date(dates[i])
-                  //     .toLocaleDateString("en-GB")
-                  //     .replace(/\//g, "-");
-                  //   datess.push(date);
-                  // }
-                  // setRangeDate([...datess]);
-                }}
-                style={{ position: "relative" }}
-                onFocus={""}
-              >
-                <div className="decision_buttons">
-                  <Button
-                    name={"Cancel"}
-                    onClick={() => {
-                      // setRangeDate([]);
-                      ref.current.closeCalendar();
-                    }}
-                  />
-                  <Button
-                    name={"Ok"}
-                    onClick={() => {
-                      ref.current.closeCalendar();
-                    }}
-                    // disabled={this.state.RangeDate.length === 0}
-                  />
-                </div>
-              </DatePicker>
+            <div className="date_picker_wrapper">
+              {fileDate.map((item, idx) => {
+                return (
+                  <div className="date_picker">
+                    <label>{Object.keys(item)[0].replaceAll("_", " ")}</label>
+                    <DatePicker
+                      placeholder={
+                        "Select " +
+                        Object.keys(item)[0].replaceAll("_", " ").toLowerCase()
+                      }
+                      ref={item.ref}
+                      format="DD-MM-YYYY"
+                      value={Object.values(item)[0]}
+                      highlightToday={false}
+                      onChange={(dates) => {
+                        let datess = "";
+                        let _fileDate = [...fileDate];
+                        for (let i = 0; i < dates.length; i++) {
+                          var date = new Date(dates[i])
+                            .toLocaleDateString("en-GB")
+                            .replace(/\//g, "-");
+                          datess.push(date);
+                        }
+                        _fileDate[idx][Object.keys(item)[0]] = datess;
+                        console.log(_fileDate[idx]["To_date"]);
+                        setFileDate([..._fileDate]);
+                        // setRangeDate([...datess]);
+                      }}
+                      style={{ position: "relative" }}
+                      onFocus={""}
+                    >
+                      <div className="decision_buttons">
+                        <Button
+                          name={"Cancel"}
+                          onClick={() => {
+                            console.log(Object.keys(item)[0]);
+                            let _fileDate = [...fileDate];
+                            _fileDate[idx][Object.keys(item)[0]] = "";
+                            console.log(_fileDate[idx].To_date);
+                            setFileDate([..._fileDate]);
+                            // setRangeDate([]);
+                            item.ref.current.closeCalendar();
+                          }}
+                        />
+                        <Button
+                          name={"Ok"}
+                          onClick={() => {
+                            item.ref.current.closeCalendar();
+                          }}
+                          // disabled={this.state.RangeDate.length === 0}
+                        />
+                      </div>
+                    </DatePicker>
+                  </div>
+                );
+              })}
             </div>
             <div className="modal_subwrapper">
-              <div style={{ background: "red" }}>
-                <input
-                  type={"file"}
-                  id="profileInput"
-                  style={{ opacity: "0" }}
-                  // accept="image/png, image/jpeg"
-                  onChange={(e) => {
-                    // let file = e.target.files[0];
-                    // console.log(file);
-                    // if (!file) {
-                    //   isProfileChanged = false;
-                    // } else {
-                    //   isProfileChanged = true;
-                    //   setProfilePic(file);
-                    // }
-                  }}
-                />
-                file
+              <div className="upload_file_wrapper">
+                <p className="select_tag">
+                  {fileName.name
+                    ? "Select another file to upload"
+                    : "Select a file to upload"}
+                </p>
+                <p className="filename_">{fileName.name}</p>
+                {fileName.name !== undefined ? (
+                  <div className="descision_buttons">
+                    <Button
+                      name={"Upload"}
+                      onClick={() => {
+                        setshowImportModal(false);
+                      }}
+                    />
+                    <Button
+                      name={"Cancel"}
+                      onClick={() => {
+                        setfileName({});
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <button className="upload_file_button">
+                    <label>{fileName.name ?? "Select File"}</label>
+                    <input
+                      type={"file"}
+                      id="profileInput"
+                      className="input_file"
+                      // accept="image/png, image/jpeg"
+                      onChange={(e) => {
+                        let file = e.target.files[0];
+                        console.log(file);
+                        setfileName(file);
+                      }}
+                    />
+                  </button>
+                )}
+                {fileName.name && (
+                  <div className="other_file_wrapper">
+                    <p className="other_tag">Select other file</p>
+                    <input
+                      type={"file"}
+                      id="profileInput"
+                      className="other_file"
+                      // accept="image/png, image/jpeg"
+                      onChange={(e) => {
+                        let file = e.target.files[0];
+                        console.log(file);
+                        setfileName(file);
+                      }}
+                    />
+                  </div>
+                )}
               </div>
-              <a href={pdf} download="shiftSample.xlsx">
+
+              <a
+                className="download_file_tag"
+                href={pdf}
+                download="shiftSample.xlsx"
+              >
                 {" "}
-                Download Here{" "}
+                Download sample file here{" "}
               </a>
             </div>
           </div>

@@ -1,6 +1,6 @@
 .navbar_wrapper {
   width: 100%;
-  background-color: rgba(209, 163, 252, 0.589);
+  background-color: #eae5fa;
 
   .navbar_subwrapper {
     width: 80%;
@@ -36,7 +36,7 @@
         gap: 10px;
       }
       .active {
-        color: #6b12b7;
+        color: #7367f0;
       }
     }
     .navbar_rhs {
@@ -53,7 +53,10 @@
           margin: 0;
           font-family: "Poppins", "Sans-serif";
           font-size: 14px;
-          font-weight: 400;
+          font-weight: 500;
+        }
+        .role_{
+          color: #5e50f7;
         }
       }
       .avatar_image {

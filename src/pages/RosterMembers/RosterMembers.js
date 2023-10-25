@@ -20,7 +20,7 @@ export default function RosterMembers() {
       options: ["Mumbai", "Kolkata"],
     },
   ]);
-  const [rangeDate, setRangeDate] = useState([]);
+  const [rangeDate, setRangeDate] = useState("");
 
   const membersData = [
     {
@@ -86,8 +86,18 @@ export default function RosterMembers() {
         <div className="roster_members_table_wrapper">
           <div className="table_upper_wrapper">
             <div className="navigation_bar">
-              <p onClick={() => navigate("/roster")}>Roster Plan Master</p>
-              <p>/ View Member</p>
+              <p
+                className="header_"
+                style={{
+                  color: "#7367f0",
+                  textDecoration: "underline",
+                  cursor: "pointer",
+                }}
+                onClick={() => navigate("/roster")}
+              >
+                Roster Plan Master
+              </p>
+              <p className="header_"> /View Member</p>
             </div>
             <div className="table_filters">
               <InputBox type="search" placeholder={"search"} />
@@ -109,7 +119,7 @@ export default function RosterMembers() {
                       <DatePicker
                         ref={ref}
                         format="DD-MM-YYYY"
-                        value={""}
+                        value={rangeDate}
                         highlightToday={false}
                         onChange={(dates) => {
                           let _filters = [...filters];
@@ -131,7 +141,7 @@ export default function RosterMembers() {
                           <Button
                             name={"Cancel"}
                             onClick={() => {
-                              setRangeDate([]);
+                              setRangeDate("");
                               ref.current.closeCalendar();
                             }}
                           />

@@ -1,6 +1,6 @@
 .roster_wrapper {
   .roster_subwrapper {
-    width: 1140px;
+    // width: 1140px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,7 +8,12 @@
     margin-left: auto;
     position: relative;
     .roster_table_wrapper {
-      width: 1140px;
+      width: 80%;
+      padding: 20px;
+      margin-top: 50px;
+      border-radius: 10px;
+      box-shadow: 0 4px 24px 0 rgba(34, 41, 47, 0.1);
+      transition: all 0.3s ease-in-out, background 0s, color 0s, border-color 0s;
       table {
         width: 100%;
       }
@@ -20,20 +25,55 @@
       th,
       td {
         text-align: start;
-        padding: 15px;
+        padding: 20px;
+        text-transform: capitalize;
+        border-bottom: 1px solid #cfcfcf;
+      }
+      th {
+        font-weight: 500;
+        background-color: #f3f2f7;
+      }
+      td {
+        font-size: 16px;
+        color: #7a7a7a;
+        font-weight: 400;
+        width: 70px;
+        cursor: pointer;
       }
       .table_upper_wrapper {
         display: flex;
         justify-content: space-between;
+        .header_ {
+          font-size: 20px;
+          font-weight: 600;
+        }
         .table_filters {
           display: flex;
           align-items: center;
+          gap: 5px;
           .__input__ {
+            margin-bottom: 0;
+            margin-top: 0;
+            width: 100%;
+            align-items: center;
             .input_style {
+              padding: 8px;
+              margin-top: 0;
             }
           }
           .btn {
-            padding: 0px 5px;
+            padding: 6px;
+            margin: 0;
+          }
+          .custom-select-container {
+            height: auto;
+            .selected-text {
+              height: auto;
+              padding: 6px;
+            }
+            .list_open {
+              top: 35%;
+            }
           }
         }
       }
@@ -44,13 +84,45 @@
         flex-wrap: wrap;
         align-items: center;
         gap: 10px;
+        padding: 20px;
 
         .date_picker {
           display: flex;
           flex-direction: column;
+
+          label {
+            margin-bottom: 5px;
+            font-size: 0.78125vw;
+            font-weight: 600;
+            margin-bottom: 5px;
+          }
+
+          .rmdp-input {
+            font-family: "Open Sans" !important;
+            font-size: 0.7291666667vw;
+            border-radius: 8px;
+            border: 2px solid #dddddd;
+            padding: 3px;
+            margin: 0;
+            width: 190px;
+          }
+          .decision_buttons {
+            display: flex;
+            .btn {
+              padding: 5px;
+              margin-bottom: 5px;
+            }
+          }
         }
         .filters_dd {
           width: 200px;
+          .dd-label {
+            margin-top: 0;
+          }
+          .selected-text {
+            color: #7a7a7a;
+            background-color: #fff;
+          }
         }
       }
     }
@@ -59,9 +131,9 @@
   .import_modal {
     background-color: #fff;
     width: 500px;
-    height: 500px;
+    height: 380px;
     border-radius: 10px;
-    padding: 10px;
+    padding: 20px;
     .close_otp_modal {
       cursor: pointer;
       display: flex;
@@ -71,13 +143,144 @@
         cursor: pointer;
       }
     }
+
+    .header_ {
+      font-size: 20px;
+      font-weight: 600;
+    }
     .modal_wrapper {
-      .date_picker {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .date_picker_wrapper {
         display: flex;
+        align-items: center;
+        gap: 16px;
+        .date_picker {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          label {
+            margin-bottom: 5px;
+            font-size: 0.78125vw;
+            font-weight: 600;
+            margin-bottom: 5px;
+          }
+
+          .rmdp-input {
+            font-family: "Open Sans" !important;
+            font-size: 0.7291666667vw;
+            border-radius: 8px;
+            border: 2px solid #dddddd;
+            padding: 3px;
+            margin: 0;
+            width: 190px;
+          }
+          .decision_buttons {
+            display: flex;
+            .btn {
+              padding: 5px;
+              margin-bottom: 5px;
+            }
+          }
+        }
       }
+
       .modal_subwrapper {
         display: flex;
         flex-direction: column;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+
+        .upload_file_wrapper {
+          border: 2px dashed #6b12b7;
+          width: 100%;
+          display: flex;
+          gap: 10px;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 50px 0px;
+          border-radius: 10px;
+          background-color: #efe5f8;
+
+          .select_tag {
+            font-size: 12px;
+            font-weight: 500;
+          }
+
+          .select_tag {
+            margin: 0;
+          }
+          .filename_ {
+            margin: 0;
+            font-size: 12px;
+            font-weight: 500;
+            color: #6b12b7;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 200px;
+            text-align: center;
+          }
+          .descision_buttons {
+            display: flex;
+            width: 200px;
+            .btn {
+              width: 100%;
+              padding: 5px;
+              font-size: 14px;
+            }
+          }
+          .upload_file_button {
+            border: none;
+            background-color: #6b12b7;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            border-radius: 10px;
+
+            label {
+              font-size: 12px;
+              font-weight: 600;
+              position: absolute;
+            }
+
+            .input_file {
+              opacity: 0;
+              cursor: pointer;
+            }
+          }
+
+          .other_file_wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            .other_tag {
+              position: absolute;
+              text-decoration: underline;
+              color: #7a7a7a;
+              font-size: 12px;
+              font-weight: 600;
+            }
+            .other_file {
+              opacity: 0;
+              cursor: pointer;
+            }
+          }
+        }
+
+        .download_file_tag {
+          font-size: 16px;
+          font-weight: 500;
+        }
       }
     }
   }
