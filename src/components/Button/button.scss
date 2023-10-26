@@ -8,7 +8,6 @@ $desk: math.div(100, 1920);
   background: #6b12b7;
   border: 0;
   border-radius: 8px;
-  font-family: Poppins;
   font-size: 18 * $desk + vw;
   color: #fff;
   margin: 0 3px;
@@ -16,6 +15,7 @@ $desk: math.div(100, 1920);
   cursor: pointer;
   user-select: none;
   overflow: hidden;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
   .btnBG {
     position: absolute;
     width: 100%;
@@ -23,6 +23,9 @@ $desk: math.div(100, 1920);
     left: 0;
     top: 0;
   }
+}
+.btn:hover {
+  box-shadow: -1px 6px 10px 0 rgba(154, 72, 187, 0.2);
 }
 
 .btn:active {

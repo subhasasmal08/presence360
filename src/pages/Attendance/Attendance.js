@@ -4,19 +4,17 @@ import "./attendance.scss";
 import InputBox from "../../components/InputBox/InputBox";
 import Button from "../../components/Button/Button";
 import Dropdown from "../../components/Dropdown/Dropdown";
-import AnimatedModal from "../../components/Modal/AnimatedModal";
-import { CloseIcon } from "../../helper/icons";
 import DatePicker from "react-multi-date-picker";
 import Pagination from "../../components/Pagination/Pagination";
 import Scroller from "../../components/Scroller/Scrollbar";
 import axios from "axios";
-import { API_URL } from "../../helper/request";
+import { API_URL, SOCKET_URL } from "../../helper/request";
 
 export default function Attendance() {
   const [showFilters, setShowFilters] = useState(false);
-  const [showExportModal, setshowExportModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [rangeDate, setRangeDate] = useState([]);
-  const [SearchText, setSearchText] = useState("");
+  const [SearchText, setSearchText] = useState(undefined);
   const [filters, setFilters] = useState([
     {
       Date_range: [],
@@ -78,23 +76,22 @@ export default function Attendance() {
   const [attendanceData, setAttendanceData] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [downloadFile, setDownloadFile] = useState("");
 
   const ref = useRef();
   useEffect(() => {
-    console.log("first");
     getAttendanceData({ currentPage: 1, searchText: "" });
   }, []);
 
   const getAttendanceData = ({ currentPage = 1, searchText = SearchText }) => {
-    console.log(SearchText);
     let arr = [];
     let url = `attendance/fetchemployeedetail?page=${currentPage}&items=10`;
     if (searchText) url += `&search=${searchText}`;
+    setIsLoading(true);
     axios
       .get(API_URL + url)
       .then((res) => {
-        console.log(res.data);
-        res.data.map((item, idx) => {
+        res.data.details.map((item, idx) => {
           arr.push({
             id: idx + 1,
             employee_code: item.employee.employee_code,
@@ -112,9 +109,9 @@ export default function Attendance() {
             out_address: "WR6X+8C9, Colombo 00300, Sri Lanka",
           });
         });
-        console.log(arr);
-        let _totalPages = Math.ceil(res.data.total / 10);
-        setTotalPages(2127);
+        let _totalPages = Math.ceil(res.data.total_count / 10);
+        setTotalPages(_totalPages);
+        setIsLoading(false);
         setAttendanceData([...arr]);
       })
       .catch((err) => {})
@@ -428,6 +425,13 @@ export default function Attendance() {
     },
   ];
 
+  const getDownloadFile = () => {
+    axios.get(API_URL + "attendance/exportExcel").then((res) => {
+      setDownloadFile(SOCKET_URL + res.data.file_path);
+      document.getElementById("my_download").click();
+    });
+  };
+
   return (
     <div className="attendance_wrapper">
       <Navbar />
@@ -443,11 +447,10 @@ export default function Attendance() {
                 onChange={(e) => {
                   let { value } = e.target;
                   if (value) {
-                    console.log(value);
                     setSearchText(value);
                     getAttendanceData({ currentPage: 1, searchText: value });
                   } else {
-                    setSearchText("");
+                    setSearchText(undefined);
                     getAttendanceData({ currentPage: 1, searchText: "" });
                   }
                 }}
@@ -457,11 +460,18 @@ export default function Attendance() {
                 onClick={() => {
                   setShowFilters(!showFilters);
                 }}
+                disabled={attendanceData.length === 0}
               />
+              <a
+                id="my_download"
+                href={downloadFile}
+                download={downloadFile}
+                style={{ display: "none" }}
+              ></a>
               <Button
                 name={"Export"}
                 onClick={() => {
-                  setshowExportModal(!showExportModal);
+                  getDownloadFile();
                 }}
               />
             </div>
@@ -533,27 +543,39 @@ export default function Attendance() {
               })}
             </div>
           )}
-          <table>
-            {attendanceData.length > 0 && (
-              <Scroller autoHeightMax="65vh">
-                {Object.keys(attendanceData[0]).map((item, index) => {
-                  return (
-                    <th key={"header" + index}>{item.replaceAll("_", " ")}</th>
-                  );
-                })}
-                {attendanceData.map((item, idx) => {
-                  return (
-                    <tr key={"table" + idx}>
-                      {Object.keys(item).map((data) => {
-                        return <td>{item[data]}</td>;
+          <div className="table_subwrapper">
+            {!isLoading ? (
+              attendanceData.length === 0 && SearchText !== undefined ? (
+                <div className="no_data">NO RECORDS FOUND</div>
+              ) : (
+                <table>
+                  {attendanceData.length > 0 && (
+                    <Scroller autoHeightMax="65vh">
+                      {Object.keys(attendanceData[0]).map((item, index) => {
+                        return (
+                          <th key={"header" + index}>
+                            {item.replaceAll("_", " ")}
+                          </th>
+                        );
                       })}
-                    </tr>
-                  );
-                })}
-              </Scroller>
+                      {attendanceData.map((item, idx) => {
+                        return (
+                          <tr key={"table" + idx}>
+                            {Object.keys(item).map((data) => {
+                              return <td>{item[data]}</td>;
+                            })}
+                          </tr>
+                        );
+                      })}
+                    </Scroller>
+                  )}
+                </table>
+              )
+            ) : (
+              <div>Loading...</div>
             )}
-          </table>
-          <div>
+          </div>
+          {totalPages >= 2 && (
             <Pagination
               style={{ justifyContent: "center" }}
               totPages={totalPages}
@@ -564,7 +586,7 @@ export default function Attendance() {
                 getAttendanceData({ currentPage: ele, searchText: "" });
               }}
             />
-          </div>
+          )}
         </div>
       </div>
     </div>

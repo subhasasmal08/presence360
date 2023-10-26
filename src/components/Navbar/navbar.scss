@@ -1,6 +1,7 @@
 .navbar_wrapper {
   width: 100%;
   background-color: #eae5fa;
+  padding: 5px;
 
   .navbar_subwrapper {
     width: 80%;
@@ -11,18 +12,19 @@
     margin-left: auto;
     position: relative;
     justify-content: space-between;
-    font-family: "Open Sans", sans-serif;
 
     .navbar_lhs {
+      .navbar_logo{
+        width: 200px;
+      }
     }
     .navbar_ul {
       display: flex;
       gap: 20px;
       align-items: center;
       .navbar_title {
-        font-family: "Poppins", "Sans-serif";
-        font-size: 14px;
-        font-weight: 400;
+        font-size: 16px;
+        font-weight: 600;
         padding: 0px 0px 0px 15px;
         list-style-type: none;
         transition: all 0.4s ease;
@@ -51,11 +53,11 @@
         .username_,
         .role_ {
           margin: 0;
-          font-family: "Poppins", "Sans-serif";
           font-size: 14px;
           font-weight: 500;
+          color: #636262;
         }
-        .role_{
+        .role_ {
           color: #5e50f7;
         }
       }

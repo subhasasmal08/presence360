@@ -1,7 +1,8 @@
 import React from "react";
 import "./navbar.scss";
 import { useNavigate, useLocation } from "react-router-dom";
-import avatar from "../../assets/Images/avatar.jpeg";
+import avatar from "../../assets/Images/profile.png";
+import navbarLogo from "../../assets/Images/navbarLogo.png";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -14,7 +15,9 @@ export default function Navbar() {
   return (
     <div className="navbar_wrapper">
       <div className="navbar_subwrapper">
-        <div className="navbar_lhs">logo</div>
+        <div className="navbar_lhs">
+          <img className="navbar_logo" src={navbarLogo}></img>
+        </div>
         <ul className="navbar_ul">
           {navbarArr.map((item) => {
             return (
@@ -41,6 +44,7 @@ export default function Navbar() {
           </div>
           <img className="avatar_image" src={avatar} alt="user_image" />
           <Logout
+            style={{ cursor: "pointer", fill: "#605f6d" }}
             onClick={() => {
               navigate("/");
             }}

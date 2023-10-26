@@ -22,7 +22,6 @@ $desk: math.div(100, 1920);
     width: 100%;
     height: 100%;
     text-align: left;
-    font-family: "Open Sans" !important;
     font-size: 14 * $desk + vw;
     // background-color: var(--device-filter);
     // box-shadow: var(--box-shadow);
@@ -85,7 +84,6 @@ $desk: math.div(100, 1920);
       overflow: hidden;
       display: block;
       text-transform: capitalize;
-      font-family: "Open Sans" !important;
       font-size: 14 * $desk + vw;
       &:hover {
         // background-color: var(--primary);

@@ -25,16 +25,17 @@
       th,
       td {
         text-align: start;
-        padding: 20px;
+        padding: 1vw;
         text-transform: capitalize;
         border-bottom: 1px solid #cfcfcf;
       }
       th {
         font-weight: 500;
         background-color: #f3f2f7;
+        font-size: 1vw;
       }
       td {
-        font-size: 16px;
+        font-size: 1vw;
         color: #7a7a7a;
         font-weight: 400;
         width: 70px;
@@ -44,10 +45,11 @@
         display: flex;
         justify-content: space-between;
         .header_ {
-          font-size: 20px;
+          font-size: 1.2vw;
           font-weight: 600;
         }
         .navigation_bar {
+          font-size: 1.2vw;
           display: flex;
           align-items: center;
           gap: 5px;
@@ -102,7 +104,6 @@
           }
 
           .rmdp-input {
-            font-family: "Open Sans" !important;
             font-size: 0.7291666667vw;
             border-radius: 8px;
             border: 2px solid #dddddd;
