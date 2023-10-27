@@ -44,10 +44,10 @@ $desk: math.div(100, 1920);
     pointer-events: none;
     transition: all 0.2s ease-in;
     ~ {
-    //   fill: var(--text);
+      //   fill: var(--text);
     }
     path {
-    //   stroke: var(--text);
+      //   stroke: var(--text);
     }
   }
   .list_open {
@@ -72,12 +72,12 @@ $desk: math.div(100, 1920);
     border-bottom-right-radius: 12px;
     z-index: 5;
     .custom-select-option {
-    //   color: var(--text);
+      //   color: var(--text);
       width: 100%;
       border: 0;
       padding: 6px 16 * $desk + vw;
       text-align: left;
-    //   background-color: var(--device-filter);
+      //   background-color: var(--device-filter);
       border-bottom: 1px solid gray;
       cursor: pointer;
       word-break: break-all;
@@ -87,8 +87,8 @@ $desk: math.div(100, 1920);
       font-size: 14 * $desk + vw;
       &:hover {
         // background-color: var(--primary);
-        background-color: #cf75e7dc;
-       color: #fff;
+        background-color: #f59191f3;
+        color: #fff;
       }
     }
   }
@@ -124,6 +124,6 @@ $desk: math.div(100, 1920);
   }
   .active_option {
     // background-color: var(--primary) !important;
-    color: #ffffff !important;
+    color: #cf5f5f !important;
   }
 }

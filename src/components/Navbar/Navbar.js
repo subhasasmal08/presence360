@@ -2,7 +2,8 @@ import React from "react";
 import "./navbar.scss";
 import { useNavigate, useLocation } from "react-router-dom";
 import avatar from "../../assets/Images/profile.png";
-import navbarLogo from "../../assets/Images/navbarLogo.png";
+import navlogo from "../../assets/Images/navbarLogo.png";
+import { encryptStorage } from "../../helper/storage";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export default function Navbar() {
     <div className="navbar_wrapper">
       <div className="navbar_subwrapper">
         <div className="navbar_lhs">
-          <img className="navbar_logo" src={navbarLogo}></img>
+          <img className="navbar_logo" src={navlogo}></img>
         </div>
         <ul className="navbar_ul">
           {navbarArr.map((item) => {
@@ -46,6 +47,7 @@ export default function Navbar() {
           <Logout
             style={{ cursor: "pointer", fill: "#605f6d" }}
             onClick={() => {
+              encryptStorage.removeItem("UID");
               navigate("/");
             }}
           />
@@ -71,4 +73,18 @@ const Logout = (props) => (
       <path d="M49.6,27c0.6-0.6,0.6-1.5,0-2.1L36.1,11.4c-0.6-0.6-1.5-0.6-2.1,0l-2.1,2.1c-0.6,0.6-0.6,1.5,0,2.1l5.6,5.6 c0.6,0.6,0.2,1.7-0.7,1.7H15.5c-0.8,0-1.5,0.6-1.5,1.4v3c0,0.8,0.7,1.6,1.5,1.6h21.2c0.9,0,1.3,1.1,0.7,1.7l-5.6,5.6 c-0.6,0.6-0.6,1.5,0,2.1l2.1,2.1c0.6,0.6,1.5,0.6,2.1,0L49.6,27z" />
     </g>
   </svg>
+);
+
+export const LoadingText = () => (
+  <section className="loading_text">
+    <div className="loading loading03">
+      <span className="_text_">L</span>
+      <span className="_text_">O</span>
+      <span className="_text_">A</span>
+      <span className="_text_">D</span>
+      <span className="_text_">I</span>
+      <span className="_text_">N</span>
+      <span className="_text_">G</span>
+    </div>
+  </section>
 );

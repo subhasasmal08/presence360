@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import visibilityon from "../../assets/Images/visibility-on.png";
 import visibilityoff from "../../assets/Images/visibility-off.png";
 import "./inputbox.scss";
-// import Tooltip from "../Tooltip/Tooltip";
 const InputBox = React.forwardRef((props, ref) => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
 
@@ -22,15 +21,6 @@ const InputBox = React.forwardRef((props, ref) => {
       />
     );
   };
-  // useEffect(() => {
-  //   if (props.helperText && props.id) {
-  //     var ele = document.querySelector("#" + props.id);
-  //     ele.classList.add("error_shake");
-  //     setTimeout(function () {
-  //       ele.classList.remove("error_shake");
-  //     }, 300);
-  //   }
-  // }, [props.helperText]);
 
   useEffect(() => {
     if ((props.error && props.id) || (props.helperText && props.id)) {
@@ -78,14 +68,6 @@ const InputBox = React.forwardRef((props, ref) => {
       </div>
 
       {props.helperText && <p className="helperText"> {props.helperText}</p>}
-      {/* {props.tooltip && (
-        <div className="_tooltip_container_">
-          <Tooltip
-            tooltip={props.tooltip}
-            type={props.type ? props.type : "left"}
-          />
-        </div>
-      )} */}
       {props?.children}
       {props.password && renderPasswordAccessory()}
     </div>

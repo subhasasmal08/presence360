@@ -11,3 +11,59 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.Toastify_adjust {
+  top: 7em !important;
+  font-size: 14px !important;
+  .Toastify__toast-icon {
+    width: 25px !important;
+  }
+  .Toastify__toast--success {
+    background: #29313a !important;
+    box-shadow: 0 2px 12px #6fcf97;
+  }
+  .Toastify__toast--error {
+    background: #29313a !important;
+    box-shadow: 0 2px 12px #d73e3e;
+  }
+  .Toastify__close-button {
+    svg {
+      path {
+        fill: #f2f4f8;
+      }
+    }
+  }
+}
+
+.loading_text {
+  .loading {
+    font-size: 20px;
+    font-weight: 800;
+    text-align: center;
+    margin: 0.6em 0.2em;
+    ._text_ {
+      display: inline-block;
+      margin: 0 -0.05em;
+    }
+  }
+  .loading03 {
+    ._text_ {
+      margin: 0 0.2em;
+      animation: loading03 0.7s infinite alternate;
+      @for $i from 1 through 6 {
+        &:nth-child(#{$i + 1}) {
+          animation-delay: #{$i * 0.1}s;
+        }
+      }
+    }
+  }
+  @keyframes loading03 {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0.8);
+    }
+  }
+}

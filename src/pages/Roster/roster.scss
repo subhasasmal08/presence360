@@ -30,20 +30,22 @@
         border-bottom: 1px solid #cfcfcf;
       }
       th {
+        color: #777676;
+        font-size: 1vw;
         font-weight: 500;
-        background-color: #f3f2f7;
+        background-color: #fcf3f3;
       }
       td {
-        font-size: 16px;
+        font-size: 0.9vw;
         color: #7a7a7a;
         font-weight: 400;
         width: 70px;
-        cursor: pointer;
       }
       .table_upper_wrapper {
         display: flex;
         justify-content: space-between;
         .header_ {
+          color: #686767;
           font-size: 20px;
           font-weight: 600;
         }
@@ -59,6 +61,8 @@
             .input_style {
               padding: 8px;
               margin-top: 0;
+              color: #7a7a7a;
+
             }
           }
           .btn {
@@ -70,6 +74,9 @@
             .selected-text {
               height: auto;
               padding: 6px;
+              background-color: #fff;
+              width: 90px;
+              color: #7a7a7a;
             }
             .list_open {
               top: 35%;
@@ -95,6 +102,7 @@
             font-size: 0.78125vw;
             font-weight: 600;
             margin-bottom: 5px;
+            opacity: 0.7;
           }
 
           .rmdp-input {
@@ -104,6 +112,24 @@
             padding: 3px;
             margin: 0;
             width: 190px;
+          }
+          .rmdp-wrapper {
+            .rmdp-arrow {
+              border: solid red;
+              border-width: 0 2px 2px 0;
+            }
+            .rmdp-week-day {
+              color: #fa5252;
+            }
+            .rmdp-range {
+              background-color: #f36e6e;
+            }
+            .sd:hover {
+              background-color: #fc5959;
+            }
+            .rmdp-selected span:not(.highlight) {
+              background-color: #ee4040;
+            }
           }
           .decision_buttons {
             display: flex;
@@ -144,6 +170,7 @@
     }
 
     .header_ {
+      color: #686767;
       font-size: 20px;
       font-weight: 600;
     }
@@ -165,6 +192,7 @@
             font-size: 0.78125vw;
             font-weight: 600;
             margin-bottom: 5px;
+            opacity: 0.7;
           }
 
           .rmdp-input {
@@ -174,6 +202,24 @@
             padding: 3px;
             margin: 0;
             width: 190px;
+          }
+          .rmdp-wrapper {
+            .rmdp-arrow {
+              border: solid red;
+              border-width: 0 2px 2px 0;
+            }
+            .rmdp-week-day {
+              color: #fa5252;
+            }
+            .rmdp-range {
+              background-color: #f36e6e;
+            }
+            .sd:hover {
+              background-color: #f36e6e;
+            }
+            .rmdp-selected span:not(.highlight) {
+              background-color: #ee4040;
+            }
           }
           .decision_buttons {
             display: flex;
@@ -193,7 +239,7 @@
         align-items: center;
 
         .upload_file_wrapper {
-          border: 2px dashed #6b12b7;
+          border: 2px dashed #f56464;
           width: 100%;
           display: flex;
           gap: 10px;
@@ -202,11 +248,12 @@
           align-items: center;
           padding: 50px 0px;
           border-radius: 10px;
-          background-color: #efe5f8;
+          background-color: #fcf3f3;
 
           .select_tag {
             font-size: 12px;
             font-weight: 500;
+            opacity: 0.7;
           }
 
           .select_tag {
@@ -216,7 +263,7 @@
             margin: 0;
             font-size: 12px;
             font-weight: 500;
-            color: #6b12b7;
+            color: #f56464;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -234,7 +281,7 @@
           }
           .upload_file_button {
             border: none;
-            background-color: #6b12b7;
+            background-color: #df3333;
             color: #fff;
             display: flex;
             justify-content: center;
@@ -252,6 +299,10 @@
               opacity: 0;
               cursor: pointer;
             }
+          }
+
+          .upload_file_button:hover {
+            box-shadow: -1px 6px 10px 0 rgba(154, 72, 187, 0.2);
           }
 
           .other_file_wrapper {
@@ -278,6 +329,7 @@
         .download_file_tag {
           font-size: 16px;
           font-weight: 500;
+          color: rgb(181, 117, 117);
         }
       }
     }

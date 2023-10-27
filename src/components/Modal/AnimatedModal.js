@@ -5,11 +5,8 @@ import { useState } from "react";
 import {
   cancelIcon,
   checkedIcon,
-  close_icon,
-  errorIcon,
   modalErrorIcon,
   modalSuccessIcon,
-  successIcon,
   warningIcon,
 } from "../../helper/icons";
 import Button from "../Button/Button";

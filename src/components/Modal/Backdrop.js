@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { motion } from "framer-motion";
 import "./modal2.scss";
 const Backdrop = ({ children, onClick, className, style }) => {

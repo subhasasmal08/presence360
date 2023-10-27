@@ -14,7 +14,6 @@ import Dropdown from "../../components/Dropdown/Dropdown";
 export default function Roaster() {
   const fromRef = useRef();
   const toRef = useRef();
-  const ref = useRef();
   const navigate = useNavigate();
 
   const [showFilters, setShowFilters] = useState(false);
@@ -46,13 +45,13 @@ export default function Roaster() {
 
   const [rosterData, setRosterData] = useState([
     {
-      from: "07-10-23",
-      to: "07-10-90",
+      from: "01-01-23",
+      to: "01-01-90",
       actions: "View members",
     },
     {
-      from: "07-10-23",
-      to: "07-10-90",
+      from: "01-01-23",
+      to: "01-01-90",
       actions: "View members",
     },
     {
@@ -61,8 +60,8 @@ export default function Roaster() {
       actions: "View members",
     },
     {
-      from: "07-10-23",
-      to: "07-10-90",
+      from: "01-01-23",
+      to: "01-01-90",
       actions: "View members",
     },
   ]);
@@ -171,7 +170,9 @@ export default function Roaster() {
                         style={{
                           textDecoration:
                             item[data] === "View members" && "underline",
-                          color: item[data] === "View members" && "#7367f0",
+                          color:
+                            item[data] === "View members" &&
+                            " rgb(181 117 117)",
                           cursor: item[data] === "View members" && "pointer",
                         }}
                         onClick={() => {

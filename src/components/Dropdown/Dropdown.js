@@ -51,9 +51,7 @@ function Dropdown({
     if (onFocus) {
       onFocus(id && id);
     }
-    // if (!showOptionList) {
     setshowOptionList(!showOptionList);
-    // }
   };
 
   useEffect(() => {
@@ -98,10 +96,6 @@ function Dropdown({
           title={defaultSelectText}
         >
           {defaultSelectText?.replace(/_/g, " ")}
-          {/* <img
-              src={expand}
-              className={showOptionList ? "drop_icon list_open" : "drop_icon"}
-            /> */}
           {expand(showOptionList)}
         </button>
       )}
@@ -195,4 +189,3 @@ const expand = (showOptionList) => (
     </g>
   </svg>
 );
-

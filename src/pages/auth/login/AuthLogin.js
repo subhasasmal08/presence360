@@ -7,6 +7,8 @@ import loginLogo from "../../../assets/Images/logo.jpg";
 import Background from "../../../assets/Images/background.jpg";
 import vector from "../../../assets/Images/vector.jpg";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { encryptStorage } from "../../../helper/storage";
 
 export default function AuthLogin() {
   const [activeTab, setActiveTab] = useState("email");
@@ -19,17 +21,17 @@ export default function AuthLogin() {
     if (activeTab === "mobile") {
       setloginData({
         phone_number: "",
-        password: "",
+        password: "Welcome@123",
       });
     } else {
       setloginData({
-        email: "",
-        password: "",
+        email: "maneesha@m3force.com",
+        password: "Welcome@123",
       });
     }
   }, [activeTab]);
 
-  const postLogin = () => {
+  const validateLogin = () => {
     let _res = false;
 
     Object.keys(loginData).map((item) => {
@@ -42,8 +44,49 @@ export default function AuthLogin() {
       setShowErrorMsg("Fill all the credentials!");
       return;
     } else {
-      navigate("/attendance");
+      postData();
     }
+  };
+
+  const postData = () => {
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: "http://192.168.1.132:8000/api/v1/attendance/login",
+      headers: {
+        Authorization: "Basic bWFuZWVzaGFAbTNmb3JjZS5jb20KOldlbGNvbWVAMTIz",
+      },
+    };
+
+    axios
+      .request(config)
+      .then((res) => {
+        console.log(res);
+        let _data = { ...res.data };
+        localStorage.removeItem("timer");
+        encryptStorage.setItem("UID", _data);
+        navigate("/attendance");
+      })
+      .catch((err) => {
+        console.log(err);
+        // setLoadingScreen(false);
+        // if (err.response.status) {
+        //   setErrorResponse(err.response.data.detail);
+        //   if (err.response.data.detail.includes("minute")) {
+        //     localStorage.setItem(
+        //       "timer",
+        //       err.response.data.detail.match(/(\d+)/)[0] * 60
+        //     );
+        //   }
+        //   notify({
+        //     msg: err.response.data.detail,
+        //   });
+        // } else {
+        //   notify({
+        //     msg: "Invalid Credential!",
+        //   });
+        // }
+      });
   };
 
   const handlePassword = (type) => {
@@ -53,6 +96,9 @@ export default function AuthLogin() {
       setPasswordType("text");
     }
   };
+
+  let ldata = encryptStorage.getItem("UID");
+  console.log(ldata);
   return (
     <div className="login_wrapper">
       <img className="bg" src={Background}></img>
@@ -66,9 +112,11 @@ export default function AuthLogin() {
           </div>
           <div className="content_subwrapper">
             <h2 className="header_">Welcome Again!</h2>
-            <div className="login_type_tab">
+            {/* <div className="login_type_tab">
               <p
-                className={activeTab === "email" ? "activetab" : "inactivetab email"}
+                className={
+                  activeTab === "email" ? "activetab" : "inactivetab email"
+                }
                 onClick={() => {
                   console.log("email");
                   setActiveTab("email");
@@ -78,7 +126,9 @@ export default function AuthLogin() {
                 Email
               </p>
               <p
-                className={activeTab === "mobile" ? "activetab" : "inactivetab mobile"}
+                className={
+                  activeTab === "mobile" ? "activetab" : "inactivetab mobile"
+                }
                 onClick={() => {
                   console.log("mobile");
                   setActiveTab("mobile");
@@ -87,7 +137,7 @@ export default function AuthLogin() {
               >
                 Mobile
               </p>
-            </div>
+            </div> */}
             <div className="input_credential_wrapper">
               {activeTab === "email" ? (
                 <div className="inputs_wrapper">
@@ -146,7 +196,7 @@ export default function AuthLogin() {
             </div>
           </div>
           <p className="error_msg">{showErrorMsg}</p>
-          <Button name={"Login"} onClick={() => postLogin()} />
+          <Button name={"Login"} onClick={() => validateLogin()} />
         </div>
       </div>
     </div>

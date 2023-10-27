@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar, { LoadingText } from "../../components/Navbar/Navbar";
 import "./attendance.scss";
 import InputBox from "../../components/InputBox/InputBox";
 import Button from "../../components/Button/Button";
@@ -8,7 +8,7 @@ import DatePicker from "react-multi-date-picker";
 import Pagination from "../../components/Pagination/Pagination";
 import Scroller from "../../components/Scroller/Scrollbar";
 import axios from "axios";
-import { API_URL, SOCKET_URL } from "../../helper/request";
+import { API_URL, SOCKET_URL, axiosApiInstance } from "../../helper/request";
 
 export default function Attendance() {
   const [showFilters, setShowFilters] = useState(false);
@@ -25,12 +25,12 @@ export default function Attendance() {
       options: ["Mumbai", "Kolkata"],
     },
     {
-      Sub_location: "",
+      Sub_location: "Thane",
       options: ["Thane", "Mulund"],
     },
     {
       Department: "",
-      options: [""],
+      options: ["IT"],
     },
     {
       Sub_department: "",
@@ -88,7 +88,7 @@ export default function Attendance() {
     let url = `attendance/fetchemployeedetail?page=${currentPage}&items=10`;
     if (searchText) url += `&search=${searchText}`;
     setIsLoading(true);
-    axios
+    axiosApiInstance
       .get(API_URL + url)
       .then((res) => {
         res.data.details.map((item, idx) => {
@@ -426,7 +426,7 @@ export default function Attendance() {
   ];
 
   const getDownloadFile = () => {
-    axios.get(API_URL + "attendance/exportExcel").then((res) => {
+    axiosApiInstance.get(API_URL + "attendance/exportExcel").then((res) => {
       setDownloadFile(SOCKET_URL + res.data.file_path);
       document.getElementById("my_download").click();
     });
@@ -519,7 +519,7 @@ export default function Attendance() {
                             onClick={() => {
                               ref.current.closeCalendar();
                             }}
-                            // disabled={this.state.RangeDate.length === 0}
+                            // disabled={this.state.RangeDate.length = == 0}
                           />
                         </div>
                       </DatePicker>
@@ -528,6 +528,7 @@ export default function Attendance() {
                 } else {
                   return (
                     <Dropdown
+                      defaultText={Object.values(item)[0] ?? "Choose option"}
                       id={"filters_" + idx}
                       className={"filters_dd"}
                       label={Object.keys(item)[0].replaceAll("_", " ")}
@@ -572,7 +573,7 @@ export default function Attendance() {
                 </table>
               )
             ) : (
-              <div>Loading...</div>
+              <LoadingText />
             )}
           </div>
           {totalPages >= 2 && (

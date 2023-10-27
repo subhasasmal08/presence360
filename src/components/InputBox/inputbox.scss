@@ -30,7 +30,8 @@ $desk: math.div(100, 1920);
     border: 2px solid #dddddd;
     padding: 10 * $desk + vw;
     font-size: 13 * $desk + vw;
-    
+    color: #7a7a7a;
+
     &:focus {
       outline: 2px solid var(--secondary);
     }

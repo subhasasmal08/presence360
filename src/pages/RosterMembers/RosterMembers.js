@@ -16,7 +16,7 @@ export default function RosterMembers() {
       options: [""],
     },
     {
-      Employees: "",
+      Employees: "Mumbai",
       options: ["Mumbai", "Kolkata"],
     },
   ]);
@@ -24,53 +24,53 @@ export default function RosterMembers() {
 
   const membersData = [
     {
-      employee_name: "subha",
+      employee_name: "abc",
       employee_code: "1234",
       mobile: "0101010101",
       department_name: "IT",
-      employee_type: "frontend",
+      employee_type: "work",
       shift: "Morning D",
-      date: "07-10-23",
+      date: "01-01-23",
       weekoff: "none",
     },
     {
-      employee_name: "subha",
+      employee_name: "abc",
       employee_code: "1234",
       mobile: "0101010101",
       department_name: "IT",
-      employee_type: "frontend",
+      employee_type: "work",
       shift: "Morning D",
-      date: "07-10-23",
+      date: "01-01-23",
       weekoff: "none",
     },
     {
-      employee_name: "subha",
+      employee_name: "abc",
       employee_code: "1234",
       mobile: "0101010101",
       department_name: "IT",
-      employee_type: "frontend",
+      employee_type: "work",
       shift: "Morning D",
-      date: "07-10-23",
+      date: "01-01-23",
       weekoff: "none",
     },
     {
-      employee_name: "subha",
+      employee_name: "abc",
       employee_code: "1234",
       mobile: "0101010101",
       department_name: "IT",
-      employee_type: "frontend",
+      employee_type: "work",
       shift: "Morning D",
-      date: "07-10-23",
+      date: "01-01-23",
       weekoff: "none",
     },
     {
-      employee_name: "subha",
+      employee_name: "abc",
       employee_code: "1234",
       mobile: "0101010101",
       department_name: "IT",
-      employee_type: "frontend",
+      employee_type: "work",
       shift: "Morning D",
-      date: "07-10-23",
+      date: "01-01-23",
       weekoff: "none",
     },
   ];
@@ -89,7 +89,7 @@ export default function RosterMembers() {
               <p
                 className="header_"
                 style={{
-                  color: "#7367f0",
+                  color: "rgb(181 117 117)",
                   textDecoration: "underline",
                   cursor: "pointer",
                 }}
@@ -161,6 +161,7 @@ export default function RosterMembers() {
                     <Dropdown
                       id={"filters_" + idx}
                       className={"filters_dd"}
+                      defaultText={Object.values(item)[0] ?? "Choose option"}
                       label={Object.keys(item)[0].replaceAll("_", " ")}
                       optionsList={item.options}
                       handleOption={(data) => {

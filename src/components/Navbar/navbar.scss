@@ -1,10 +1,12 @@
 .navbar_wrapper {
   width: 100%;
-  background-color: #eae5fa;
+  // background-color: #f8eded;
+  background: rgb(245,193,193);
+  background: radial-gradient(circle, rgba(245,193,193,0.20211834733893552) 0%, rgba(255,255,255,1) 100%);
   padding: 5px;
 
   .navbar_subwrapper {
-    width: 80%;
+    width: 82%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,8 +16,8 @@
     justify-content: space-between;
 
     .navbar_lhs {
-      .navbar_logo{
-        width: 200px;
+      .navbar_logo {
+        width: 205px;
       }
     }
     .navbar_ul {
@@ -34,11 +36,11 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        color: #383740;
+        color: #686767;
         gap: 10px;
       }
       .active {
-        color: #7367f0;
+        color: #f56464;
       }
     }
     .navbar_rhs {
@@ -58,7 +60,7 @@
           color: #636262;
         }
         .role_ {
-          color: #5e50f7;
+          color: #f36e6e;
         }
       }
       .avatar_image {
